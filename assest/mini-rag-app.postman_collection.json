@@ -1,0 +1,28 @@
+{
+  "info": {
+    "_postman_id": "3cc80330-25ac-4f91-9e4e-162411068dc7",
+    "name": "mini RAG",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58046074",
+    "_collection_link": "https://go.postman.co/collection/58046074-3cc80330-25ac-4f91-9e4e-162411068dc7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "API",
+      "value": ""
+    }
+  ]
+}
