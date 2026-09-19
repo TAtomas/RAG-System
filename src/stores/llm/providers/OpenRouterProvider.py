@@ -1,18 +1,18 @@
 from ..LLMInterface import LLMInterface
 from openai import OpenAI
-from ..LLMEnums import OpenAIEnums
+from ..LLMEnums import  OpenRouterEnums
 import logging
 
 
-class OpenAIProvider(LLMInterface):
-    
+class OpenRouterProvider(LLMInterface):
+
     def __init__(self , api_key :str ,
-                 api_url:str =None ,
-                 default_max_input_characters :int=1000,
-                 default_generation_max_output_tokens :int =1000,
-                 default_generation_temperature:float =0.1
-                 ):
-        
+                     api_url:str =None ,
+                     default_max_input_characters :int=1000,
+                     default_generation_max_output_tokens :int =1000,
+                     default_generation_temperature:float =0.1
+                     ):
+            
         self.api_key=api_key
         self.api_url=api_url
 
@@ -26,12 +26,12 @@ class OpenAIProvider(LLMInterface):
 
         self.client =OpenAI(
             api_key=self.api_key,
-            api_url=self.api_url
+            base_url=self.api_url
         )
 
         self.logger=logging.getLogger(__file__)
-
-
+    
+    
     def set_generation_model(self, model_id:str ):
         self.generation_model_id=model_id
 
@@ -46,7 +46,7 @@ class OpenAIProvider(LLMInterface):
     def generate_text(self ,prompt :str ,chat_history :list=[],
                             max_output_token :int = None,temperature:float =None):
         if not self.client:
-            self.logger.error("OPENAI Client was not set")
+            self.logger.error("OpenRouter Client was not set")
             return None
         
         if not self.generation_model_id:
@@ -57,7 +57,7 @@ class OpenAIProvider(LLMInterface):
         temperature =temperature if temperature else self.default_generation_temperature
 
         chat_history.append(
-            self.construct_prompt(prompt=prompt ,role= OpenAIEnums.USER.value)
+            self.construct_prompt(prompt=prompt ,role= OpenRouterEnums.USER.value)
         )
 
         response =self.client.chat.completions.create(
@@ -68,7 +68,7 @@ class OpenAIProvider(LLMInterface):
         )
 
         if not response or not response.choices or len(response.choices) == 0 or not response.choices[0].message:
-            self.logger.error("error while generate tokens with OpenAI")
+            self.logger.error("error while generate tokens with OpenRouter")
             return None
 
         return response.choices[0].message.content
@@ -77,7 +77,7 @@ class OpenAIProvider(LLMInterface):
 
     def embed_text(self ,text :str ,document_type :str = None):
         if not self.client:
-            self.logger.error("OPENAI Client was not set")
+            self.logger.error("OpenRouter Client was not set")
             return None
 
         if not self.embedding_model_id:
@@ -89,9 +89,9 @@ class OpenAIProvider(LLMInterface):
         )
 
         if not response or not response.data or len(response.data)==0 or not response.data[0].embedding:
-            self.logger.error("error while embedding text with OpenAI")
+            self.logger.error("error while embedding text with OpenRouter")
             return None
-       
+        
         return response.data[0].embedding
 
 
@@ -100,10 +100,4 @@ class OpenAIProvider(LLMInterface):
             "role":role,
             "content":self.process_text(text=prompt)
         }
-
-   
     
-        
-        
-
-
