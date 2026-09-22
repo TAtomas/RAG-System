@@ -25,7 +25,7 @@ class GroqProvider(LLMInterface):
         self.embedding_size =None
 
         self.client =Groq(api_key=self.api_key)
-
+        self.enums=GroqEnums
         self.logger=logging.getLogger(__file__)
 
 

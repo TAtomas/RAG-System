@@ -1,5 +1,7 @@
 from abc import ABC ,abstractmethod
 from typing import List
+from models.db_schemas import RetrievedDocument
+
 
 class VectorDBInterface(ABC):
 
@@ -32,11 +34,11 @@ class VectorDBInterface(ABC):
         pass
 
     @abstractmethod
-    def insert_one(self ,collection_name :str ,text:str , vector:list ,metadeta:dict =None ,record_id:str =None):
+    def insert_one(self ,collection_name :str ,text:str , vector:list ,metadata:dict =None ,record_id:str =None):
         pass
 
     @abstractmethod
-    def insert_many(self ,collection_name :str ,texts:list , vectors:list ,metadeta:list =None ,record_ids:list =None,batch_size:int =50):
+    def insert_many(self ,collection_name :str ,texts:list , vectors:list ,metadata:list =None ,record_ids:list =None,batch_size:int =50):
         pass
 
     @abstractmethod
