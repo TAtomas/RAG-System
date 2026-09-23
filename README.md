@@ -15,7 +15,7 @@ $ conda create -n mini-rag python=3.8
 ```
 3) Activate the environment:
 ```bash
-$ conda activate mini-rag
+$ conda activate mini-rag-app
 ```
 
 ### (Optional) Setup you command line interface for better readability
@@ -39,6 +39,14 @@ $ cp .env.example .env
 ```
 
 Set your environment variables in the `.env` file. Like `OPENAI_API_KEY` value.
+## Run docker 
+
+```bash
+$ cd  docker
+$ cp .env.example .env
+```
+ - update `.env` with your credentials
+
 
 ## Run the FastAPI server
 
