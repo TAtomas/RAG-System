@@ -9,6 +9,7 @@ class ResponseSignal(Enum):
     FILE_UPLOAD_FAILED = "file_upload_failed"
     PROCESSING_FAILED = "processing_failed"
     PROCESSING_SUCCESS ="process_success"
+<<<<<<< HEAD
     PROJECT_NOT_FOUND_ERROR = "project_not_found"
     INSERT_INTO_VECTORDB_ERROR = "insert_into_vectordb_error"
     INSERT_INTO_VECTORDB_SUCCESS = "insert_into_vectordb_success"
@@ -17,4 +18,6 @@ class ResponseSignal(Enum):
     VECTORDB_SEARCH_SUCCESS = "vectordb_search_success"
     RAG_ANSWER_ERROR = "rag_answer_error"
     RAG_ANSWER_SUCCESS = "rag_answer_success"
+    
+=======
     
