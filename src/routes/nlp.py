@@ -180,10 +180,10 @@ async def search_index(request:Request,project_id:str,search_rquest :SearchReque
                 )
     return JSONResponse(
         content={
-             "signal": ResponseSignal.RAG_ANSWER_SUCCESS.value,
+             #"signal": ResponseSignal.RAG_ANSWER_SUCCESS.value,
              "answer":answer,
-             "full_prompt":full_prompt,
-             "chat_history":chat_histor
+             #"full_prompt":full_prompt,
+             #"chat_history":chat_histor
                 }
          )
 
