@@ -8,8 +8,8 @@ class OpenAIProvider(LLMInterface):
     
     def __init__(self , api_key :str ,
                  api_url:str =None ,
-                 default_max_input_characters :int=1000,
-                 default_generation_max_output_tokens :int =1000,
+                 default_max_input_characters :int=2000,
+                 default_generation_max_output_tokens :int =2000,
                  default_generation_temperature:float =0.1
                  ):
         

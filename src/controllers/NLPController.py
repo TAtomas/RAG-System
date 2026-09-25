@@ -59,12 +59,13 @@ class NLPController(BaseController):
         collection_name=self.create_collection_name(project_id=project.project_id)
 
         vector =self.embedding_client.embed_text(text=text , document_type=DocumentTypeEnum.QUERY.value)
+        
 
         if not vector or len(vector)==0:
             return False
 
         result =self.vectordb_client.search_by_vector(collection_name=collection_name,vector=vector,limit=limit)
-
+        
         if not result:
             return False
 
@@ -102,6 +103,7 @@ class NLPController(BaseController):
 
         full_prompt="\n\n".join([documents_prompts,footer_prompt])
         answer= self.generation_client.generate_text(prompt=full_prompt,chat_history=chat_history)
+        print(f"ans{answer}")
         return answer,full_prompt,chat_history
      
 

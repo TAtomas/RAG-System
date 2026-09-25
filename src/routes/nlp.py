@@ -45,8 +45,8 @@ async def index_project(request:Request,project_id:str ,push_request:PushRequest
     page_no=1
     inserted_items_count=0
     #idx=0
-    limit_requestes=15
-    while has_record and limit_requestes:
+   
+    while has_record :
         page_chunks=await chunk_model.get_project_chunks(project_id=project.id,page_no=page_no)
         if len(page_chunks):
             page_no+=1
@@ -64,12 +64,14 @@ async def index_project(request:Request,project_id:str ,push_request:PushRequest
                 chunks_ids=chunks_ids,
                 do_reset=push_request.do_reset
             )
+            inserted_items_count+=len(page_chunks)
             logger.info(f"chunk id: {page_chunks[0].id}")
             logger.info(f"Index result: {is_inserted}")
             logger.info(f"Chunks count: {len(page_chunks)}")
+            logger.info(f"inserted count: {inserted_items_count}")
         except Exception as e:
             logger.exception("Error while indexing project")
-            
+           
         if not is_inserted:
             return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -78,8 +80,8 @@ async def index_project(request:Request,project_id:str ,push_request:PushRequest
                  "inserted_items_count":inserted_items_count
             }
         )
-        inserted_items_count+=1
-        limit_requestes-=1
+        
+        
 
     return JSONResponse(
             content={
@@ -180,7 +182,7 @@ async def search_index(request:Request,project_id:str,search_rquest :SearchReque
                 )
     return JSONResponse(
         content={
-             #"signal": ResponseSignal.RAG_ANSWER_SUCCESS.value,
+            # "signal": ResponseSignal.RAG_ANSWER_SUCCESS.value,
              "answer":answer,
              #"full_prompt":full_prompt,
              #"chat_history":chat_histor
