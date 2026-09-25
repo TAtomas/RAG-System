@@ -133,6 +133,46 @@ class QdrantDBProvider(VectorDBInterface):
             })
             for result in results.points
         ]
+    def delete_points_by_text(self, collection_name: str, text: str):
+        if not self.is_collection_existed(collection_name=collection_name):
+            self.logger.error("Non exists Collection")
+            return False
+
+        try:
+            points, _ = self.client.scroll(
+                collection_name=collection_name,
+                scroll_filter=models.Filter(
+                    must=[
+                        models.FieldCondition(
+                            key="text",
+                            match=models.MatchText(text=text)
+                        )
+                    ]
+                ),
+                limit=1000,
+                with_payload=True,
+                with_vectors=False
+            )
+
+            if not points:
+                self.logger.info("No matching points found")
+                return False
+
+            point_ids = [point.id for point in points]
+
+            self.client.delete(
+                collection_name=collection_name,
+                points_selector=models.PointIdsList(
+                    points=point_ids
+                )
+            )
+
+            self.logger.info(f"Deleted {len(point_ids)} points")
+            return True
+
+        except Exception as e:
+            self.logger.error(f"Error while deleting points: {e}")
+            return False
 
 
 

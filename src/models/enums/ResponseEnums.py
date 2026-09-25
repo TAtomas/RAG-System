@@ -18,3 +18,5 @@ class ResponseSignal(Enum):
     RAG_ANSWER_ERROR = "rag_answer_error"
     RAG_ANSWER_SUCCESS = "rag_answer_success"
     
+
+    

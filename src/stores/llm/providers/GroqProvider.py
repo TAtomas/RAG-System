@@ -8,7 +8,7 @@ class GroqProvider(LLMInterface):
     
     def __init__(self , api_key :str ,
                  api_url:str =None ,
-                 default_max_input_characters :int=1000,
+                 default_max_input_characters :int=3000,
                  default_generation_max_output_tokens :int =1000,
                  default_generation_temperature:float =0.1
                  ):
@@ -63,11 +63,10 @@ class GroqProvider(LLMInterface):
             max_tokens= max_output_token,
             temperature=temperature
         )
-
+       
         if not response or not response.choices or len(response.choices) == 0 or not response.choices[0].message:
             self.logger.error("error while generate tokens with Groq")
             return None
-
         return response.choices[0].message.content
 
     
