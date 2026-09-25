@@ -67,7 +67,6 @@ class GroqProvider(LLMInterface):
         if not response or not response.choices or len(response.choices) == 0 or not response.choices[0].message:
             self.logger.error("error while generate tokens with Groq")
             return None
-        print(f"response.choices[0].message.content:{response}")
         return response.choices[0].message.content
 
     
