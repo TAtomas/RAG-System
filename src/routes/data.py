@@ -35,7 +35,7 @@ async def upload_data(request:Request,project_id , file :UploadFile ,
     is_valid , ruselt=data_controller.valildate_uploaded_file(file =file)
     if not is_valid:
         return JSONResponse(
-            status_code = status.HTTP_400_BAD_REQUSET,
+            status_code = status.HTTP_400_BAD_REQUEST,
             content={
                 "signal":ruselt
             }
